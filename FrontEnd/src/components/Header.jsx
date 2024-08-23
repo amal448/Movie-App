@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import logo from '../assets/logo.png'
-import { NavLink, useNavigate,Link } from 'react-router-dom'
+import { NavLink, useNavigate,Link, useLocation } from 'react-router-dom'
 import usericon from '../assets/user.png'
 import { IoIosSearch } from "react-icons/io";
 import { navigation } from '../constant/navigation';
 
 
 const Header = () => {
-    const [searchInput,setSearchInput]=useState("")
+    const location=useLocation()
+    const removeSpace=location?.search?.slice(3)?.split("%20")?.join(" ")
+    
+    const [searchInput,setSearchInput]=useState(removeSpace)
     const navigate=useNavigate()
-
+    console.log(location.search.slice(3));
+    
     const handleSubmit=(e)=>{
         e.preventDefault()
     }

@@ -23,11 +23,11 @@ useEffect(()=>{
   return (
     <>
       <BannerHome />
-      <HorrizontalScrollData  data={trendingData} heading={"Trending Now"} trending={true}/>
-      <HorrizontalScrollData  data={nowPlayingData} heading={"Now Playing"}/>
-      <HorrizontalScrollData  data={toprated} heading={"Top Rated"}/>
-      <HorrizontalScrollData  data={popular} heading={"Popular TV Show"}/>
-      <HorrizontalScrollData  data={onTheAirShowData} heading={"On The Air"}/>
+      <HorrizontalScrollData  data={trendingData} heading={"Trending Now"} trending={true} />
+      <HorrizontalScrollData  data={nowPlayingData} heading={"Now Playing"} media_type={"movie"}/>
+      <HorrizontalScrollData  data={toprated} heading={"Top Rated"} media_type={"movie"}/>
+      <HorrizontalScrollData  data={popular} heading={"Popular TV Show"} media_type={"tv"}/>
+      <HorrizontalScrollData  data={onTheAirShowData} heading={"On The Air"} media_type={"tv"}/>
       
     </>
   )

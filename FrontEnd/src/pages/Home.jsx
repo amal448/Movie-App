@@ -1,26 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BannerHome from '../components/BannerHome'
-import Card from '../components/Card'
 import { useSelector } from 'react-redux'
+import HorrizontalScrollData from '../components/HorrizontalScrollData'
+import useFetch from '../hooks/useFetch'
 
 const Home = () => {
   const trendingData = useSelector(state => state.movieData.bannerData)
+  const {data:nowPlayingData}=useFetch("/movie/now_playing")
+  const {data:popular}=useFetch("/movie/popular")
+  const {data:toprated}=useFetch("/movie/top_rated")
+  const {data:onTheAirShowData}=useFetch("/tv/on_the_air")
 
+
+
+
+
+
+useEffect(()=>{
+  // fetchNowPlayingData()
+  // PopularMovieData()
+},[])
   return (
     <>
       <BannerHome />
-      <div className='container mx-auto px-3 my-10'>
-        <h2 className='text-xl lg:text-2xl font-bold mb-2'>Trending Now</h2>
-        <div>
-          {
-            trendingData.map((data) => {
-              return (
-                <Card key={data.id} data={data} />
-              )
-            })
-          }
-        </div>
-      </div>
+      <HorrizontalScrollData  data={trendingData} heading={"Trending Now"} trending={true}/>
+      <HorrizontalScrollData  data={nowPlayingData} heading={"Now Playing"}/>
+      <HorrizontalScrollData  data={toprated} heading={"Top Rated"}/>
+      <HorrizontalScrollData  data={popular} heading={"Popular TV Show"}/>
+      <HorrizontalScrollData  data={onTheAirShowData} heading={"On The Air"}/>
+      
     </>
   )
 }

@@ -10,10 +10,11 @@ const SearchPage = () => {
 
   const [data,setData]=useState([])
   const [pageNo, setPageNo] = useState(1)
-  
+  const query =location?.search?.slice(3)
+
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/search/collection`, {
+      const response = await axios.get(`/search/multi`, {
         params: {
           query:location?.search?.slice(3),
           page: pageNo,
@@ -36,9 +37,13 @@ const SearchPage = () => {
   }
 
   useEffect(()=>{
-    setPageNo(1)
-    setData([])
-    fetchData()
+
+    if(query){
+      setPageNo(1)
+      setData([])
+      fetchData()
+    }
+
   },[location?.search])
 
   const handleScroll = () => {
@@ -51,7 +56,10 @@ const SearchPage = () => {
   }, [])
 
   useEffect(() => {
-    fetchData()
+    if(query)
+    { 
+      fetchData()
+    }
   }, [pageNo])
 
   return (
@@ -60,7 +68,8 @@ const SearchPage = () => {
       <div className="lg:hidden my-2 mx-1 sticky top-[70px] z-30">
         <input type="text" placeholder='Search Here..' onChange={(e)=>navigate(`/search?q=${e.target.value}`)} 
         className='px-4 py-1 text-lg w-full bg-white rounded-full text-neutral-700'
-        />
+        
+        value={query?.split("%20")?.join(" ")}/>
       </div>
 
 
